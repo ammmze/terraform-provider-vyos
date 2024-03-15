@@ -3,7 +3,7 @@ module github.com/TGNThump/terraform-provider-vyos
 go 1.19
 
 require (
-	github.com/foltik/vyos-client-go v0.4.2
+	github.com/foltik/vyos-client-go v0.4.3-0.20230628033509-5944c2819b30
 	github.com/hashicorp/terraform-plugin-docs v0.14.1
 	github.com/hashicorp/terraform-plugin-framework v1.1.1
 	github.com/hashicorp/terraform-plugin-go v0.14.3

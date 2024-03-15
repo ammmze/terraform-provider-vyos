@@ -11,18 +11,20 @@ import (
 )
 
 type VyosConfig struct {
-	apiClient    *client.Client
-	skipSaving   bool
-	saveFile     string
-	mutex        sync.Mutex
-	cachedConfig *map[string]any
+	apiClient       *client.Client
+	skipSaving      bool
+	saveFile        string
+	mutex           sync.Mutex
+	cachedConfig    *map[string]any
+	containerImages *VyosContainerImages
 }
 
 func New(apiClient *client.Client, skipSaving bool, saveFile string) *VyosConfig {
 	config := &VyosConfig{
-		skipSaving: skipSaving,
-		saveFile:   saveFile,
-		apiClient:  apiClient,
+		skipSaving:      skipSaving,
+		saveFile:        saveFile,
+		apiClient:       apiClient,
+		containerImages: NewContainerImages(apiClient),
 	}
 	return config
 }
@@ -147,4 +149,8 @@ func getConfigFromPath(configTree map[string]interface{}, path_components []stri
 	} else { // 1+ more path components
 		return getConfigFromPath(configTree, path_components[1:])
 	}
+}
+
+func (vc *VyosConfig) ContainerImages() *VyosContainerImages {
+	return vc.containerImages
 }
